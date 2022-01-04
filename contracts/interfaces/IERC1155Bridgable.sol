@@ -9,5 +9,11 @@ interface IERC1155Bridgable is IERC1155Upgradeable {
 	  * SHOULD only be callable by the bridge network
 	  * MUST revert if the token already exists
 	  */
-	 function bridgeMint(address recipient, uint256 id, uint256 amount) external;
+	 function bridgeMint(
+		 address recipient,
+		 uint256 id,
+		 uint256 amount,
+		 bytes calldata data,
+		 bytes calldata verification
+	 ) external;
 }

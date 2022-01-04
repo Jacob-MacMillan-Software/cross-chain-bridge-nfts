@@ -9,5 +9,5 @@ interface IERC721Bridgable is IERC721Upgradeable {
 	  * SHOULD only be callable by the bridge network
 	  * MUST revert if the token already exists
 	  */
-	 function bridgeMint(address recipient, uint256 id) external;
+	 function bridgeMint(address recipient, uint256 id, bytes calldata verification) external;
 }
