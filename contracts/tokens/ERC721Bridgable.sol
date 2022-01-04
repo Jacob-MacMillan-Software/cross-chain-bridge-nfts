@@ -1,8 +1,8 @@
 //SPDX-License-Identifier: Unlicense
 pragma solidity ^0.8.0;
 
-import "./IERC721Bridgable.sol";
-import "./BridgeMinters.sol";
+import "../interfaces/IERC721Bridgable.sol";
+import "../utils/BridgeMinters.sol";
 
 abstract contract ERC721Bridgable is IERC721Bridgable, BridgeMinters {
 	/**
