@@ -13,8 +13,6 @@ contract ERC1155BridgableUserMinting is ERC1155Bridgable {
 
 	// Stores which nonces have been used in user item mints
 	mapping (uint256 => bool) public userMintNonce;
-	// This is just a convience so the owner can track what nonce to use
-	uint256 public nextUserMintNonce;
 
 	function __ERC1155BridgableUserMinting_init(string memory _uri) internal /* onlyInitializing */ {
 		__ERC1155Bridgable_init(_uri);
@@ -43,7 +41,6 @@ contract ERC1155BridgableUserMinting is ERC1155Bridgable {
 		// Verify nonce is valid
 		require(!userMintNonce[_nonce], "ERC1155BridgableUserMinting: Nonce already used");
 		userMintNonce[_nonce] = true;
-		if(nextUserMintNonce < _nonce) nextUserMintNonce = _nonce + 1;
 
 		// Verify hash and signature are valid
 		_verifyMintSignature(_recipient, _id, _amount, _nonce, _data, _verification, owner());
