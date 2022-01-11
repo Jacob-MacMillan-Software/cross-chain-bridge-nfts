@@ -14,7 +14,7 @@ contract ERC1155BridgableUserMinting is ERC1155Bridgable {
 	// Stores which nonces have been used in user item mints
 	mapping (uint256 => bool) public userMintNonce;
 
-	function __ERC1155BridgableUserMinting_init(string memory _uri) internal /* onlyInitializing */ {
+	function __ERC1155BridgableUserMinting_init(string memory _uri) internal onlyInitializing {
 		__ERC1155Bridgable_init(_uri);
 	}
 
@@ -34,8 +34,8 @@ contract ERC1155BridgableUserMinting is ERC1155Bridgable {
 		address _recipient,
 		uint256 _id,
 		uint256 _amount,
-		uint256 _nonce,
 		bytes calldata _data,
+		uint256 _nonce,
 		bytes calldata _verification
 	) external {
 		// Verify nonce is valid
@@ -43,7 +43,7 @@ contract ERC1155BridgableUserMinting is ERC1155Bridgable {
 		userMintNonce[_nonce] = true;
 
 		// Verify hash and signature are valid
-		_verifyMintSignature(_recipient, _id, _amount, _nonce, _data, _verification, owner());
+		_verifyMintSignature(_recipient, _id, _amount, _data, _nonce, _verification, owner());
 
 		_mint(_recipient, _id, _amount, _data);
 	}
@@ -52,11 +52,11 @@ contract ERC1155BridgableUserMinting is ERC1155Bridgable {
 		address _recipient,
 		uint256 _id,
 		uint256 _amount,
-		uint256 _nonce,
 		bytes calldata _data,
+		uint256 _nonce,
 		bytes calldata _verification,
 		address _expectedSigner
-	) internal pure {
+	) internal view {
 		// Verify _verification
 		bytes32 params;
 		bytes memory signature;
@@ -67,8 +67,8 @@ contract ERC1155BridgableUserMinting is ERC1155Bridgable {
 			_recipient,
 			_id,
 			_amount,
-			_nonce,
-			_data
+			_data,
+			_nonce
 		)).toEthSignedMessageHash() == params, "ERC1155BridgableUserMinting: Invalid verification");
 
 		// Verify signer is owner

@@ -7,7 +7,7 @@ import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 abstract contract BridgeMinters is OwnableUpgradeable {
 	mapping (address => bool) public isBridge;
 
-	function __BridgeMinters_init() internal /* onlyInitializing */ {
+	function __BridgeMinters_init() internal onlyInitializing {
 		__Ownable_init();
 	}
 

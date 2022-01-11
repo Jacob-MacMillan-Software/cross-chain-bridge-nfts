@@ -14,7 +14,7 @@ contract ERC1155Bridgable is IERC1155Bridgable, BridgeMinters, ERC1155Upgradeabl
 	using ECDSAUpgradeable for bytes32;
 	using ECDSAUpgradeable for bytes;
 
-	function __ERC1155Bridgable_init(string memory _uri) internal /* onlyInitializing */ {
+	function __ERC1155Bridgable_init(string memory _uri) internal onlyInitializing {
 		__ERC1155_init(_uri);
 		__BridgeMinters_init();
 	}
