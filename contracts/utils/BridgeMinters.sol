@@ -1,12 +1,13 @@
-// SPDX-License-Identifier: UNLICENSED
+// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
+import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 
 abstract contract BridgeMinters is OwnableUpgradeable {
 	mapping (address => bool) public isBridge;
 
-	function __BridgeMinters_init() internal {
+	function __BridgeMinters_init() internal onlyInitializing {
 		__Ownable_init();
 	}
 
