@@ -56,7 +56,7 @@ contract ERC1155BridgableUserMinting is ERC1155Bridgable {
 		uint256 _nonce,
 		bytes calldata _verification,
 		address _expectedSigner
-	) internal view {
+	) internal pure {
 		// Verify _verification
 		bytes32 params;
 		bytes memory signature;

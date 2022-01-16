@@ -3,19 +3,23 @@ pragma solidity ^0.8.0;
 
 import "../interfaces/IERC721Bridgable.sol";
 import "../utils/BridgeMinters.sol";
-import "@openzeppelin/contracts-upgradeable/token/ERC721/ERC721Upgradeable.sol";
+import "../../ERC721A/contracts/ERC721AUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/utils/cryptography/ECDSAUpgradeable.sol";
 
 /**
  * @dev This contract can be deployed without modification, but it is intended as a template
  * to add more advanced bridge interaction to a custom ERC-721 contract
  */
-contract ERC721Bridgable is IERC721Bridgable, BridgeMinters, ERC721Upgradeable {
+contract ERC721Bridgable is IERC721Bridgable, BridgeMinters, ERC721AUpgradeable {
 	using ECDSAUpgradeable for bytes32;
 	using ECDSAUpgradeable for bytes;
 
-	function __ERC721Bridgable_init(string memory _name, string memory _symbol) internal /* onlyInitializing */ {
-		__ERC721_init(_name, _symbol);
+	function __ERC721Bridgable_init(
+		string memory _name,
+		string memory _symbol,
+		uint256 _maxBatch
+	) internal onlyInitializing {
+		super.initialize(_name, _symbol, _maxBatch);
 		__BridgeMinters_init();
 	}
 
@@ -24,7 +28,7 @@ contract ERC721Bridgable is IERC721Bridgable, BridgeMinters, ERC721Upgradeable {
 	 */
 	function supportsInterface(
 		bytes4 interfaceId
-	) public view virtual override(ERC721Upgradeable, IERC165Upgradeable) returns (bool) {
+	) public view virtual override(ERC721AUpgradeable, IERC165Upgradeable) returns (bool) {
 		return super.supportsInterface(interfaceId) ||
 			interfaceId == type(IERC721Bridgable).interfaceId;
 	}
@@ -46,7 +50,7 @@ contract ERC721Bridgable is IERC721Bridgable, BridgeMinters, ERC721Upgradeable {
 		// Verify _verification
 		_verifyMintSignature(_recipient, _id,  _verification, owner());
 
-		_mint(_recipient, _id);
+		_safeMint(_recipient, _id, "");
 	}
 
 	function _verifyMintSignature(

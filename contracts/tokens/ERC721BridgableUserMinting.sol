@@ -14,8 +14,12 @@ contract ERC721BridgableUserMinting is ERC721Bridgable {
 	// Stores which nonces have been used in user item mints
 	mapping (uint256 => bool) public userMintNonce;
 
-	function __ERC721BridgableUserMinting_init(string memory _name, string memory _symbol) internal /* onlyInitializing */ {
-		__ERC721Bridgable_init(_name, _symbol);
+	function __ERC721BridgableUserMinting_init(
+		string memory _name,
+		string memory _symbol,
+		uint256 _maxBatch
+	) internal onlyInitializing {
+		__ERC721Bridgable_init(_name, _symbol, _maxBatch);
 	}
 
 	/**
@@ -41,7 +45,7 @@ contract ERC721BridgableUserMinting is ERC721Bridgable {
 		// Verify _verification
 		_verifyMintSignature(_recipient, _id, _nonce, _verification, owner());
 
-		_mint(_recipient, _id);
+		_safeMint(_recipient, _id, "");
 	}
 
 	function _verifyMintSignature(
