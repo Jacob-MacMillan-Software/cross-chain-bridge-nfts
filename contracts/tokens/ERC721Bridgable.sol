@@ -50,7 +50,7 @@ contract ERC721Bridgable is IERC721Bridgable, BridgeMinters, ERC721AUpgradeable 
 		// Verify _verification
 		_verifyMintSignature(_recipient, _id,  _verification, owner());
 
-		_safeMint(_recipient, _id, "");
+		_mint(_recipient, _id);
 	}
 
 	function _verifyMintSignature(

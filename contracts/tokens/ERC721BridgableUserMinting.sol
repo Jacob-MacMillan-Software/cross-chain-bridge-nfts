@@ -45,7 +45,7 @@ contract ERC721BridgableUserMinting is ERC721Bridgable {
 		// Verify _verification
 		_verifyMintSignature(_recipient, _id, _nonce, _verification, owner());
 
-		_safeMint(_recipient, _id, "");
+		_mint(_recipient, _id);
 	}
 
 	function _verifyMintSignature(
