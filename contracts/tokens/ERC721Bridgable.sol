@@ -19,7 +19,7 @@ contract ERC721Bridgable is IERC721Bridgable, BridgeMinters, ERC721AUpgradeable 
 		string memory _symbol,
 		uint256 _maxBatch
 	) internal onlyInitializing {
-		super.initialize(_name, _symbol, _maxBatch);
+		__ERC721A_init(_name, _symbol, _maxBatch);
 		__BridgeMinters_init();
 	}
 
