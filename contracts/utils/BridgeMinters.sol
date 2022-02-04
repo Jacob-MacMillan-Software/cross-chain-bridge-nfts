@@ -16,11 +16,11 @@ abstract contract BridgeMinters is OwnableUpgradeable {
 		_;
 	}
 
-	function addBridgeAddress(address _bridge) external {
+	function addBridgeAddress(address _bridge) external onlyOwner {
 		isBridge[_bridge] = true;
 	}
 
-	function removeBridgeAddress(address _bridge) external {
+	function removeBridgeAddress(address _bridge) external onlyOwner {
 		isBridge[_bridge] = false;
 	}
 }
