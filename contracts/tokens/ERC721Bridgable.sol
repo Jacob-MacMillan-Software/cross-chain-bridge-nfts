@@ -44,33 +44,8 @@ contract ERC721Bridgable is IERC721Bridgable, BridgeMinters, ERC721AUpgradeable 
 	 */
 	function bridgeMint(
 		address _recipient,
-		uint256 _id,
-		bytes calldata _verification
+		uint256 _id
 	) external virtual override onlyBridge {
-		// Verify _verification
-		_verifyMintSignature(_recipient, _id,  _verification, owner());
-
 		_mint(_recipient, _id);
-	}
-
-	function _verifyMintSignature(
-		address _recipient,
-		uint256 _id,
-		bytes calldata _verification,
-		address _expectedSigner
-	) internal pure {
-		// Verify _verification
-		bytes32 params;
-		bytes memory signature;
-		(params, signature) = abi.decode(_verification, (bytes32, bytes));
-
-		// Verification data matches given data
-		require(keccak256(abi.encode(
-			_recipient,
-			_id
-		)).toEthSignedMessageHash() == params, "ERC1155Bridgable: Invalid verification");
-
-		// Verify signer is owner
-		require(params.recover(signature) == _expectedSigner, "ERC1155Bridgeable: Invalid signature");
 	}
 }

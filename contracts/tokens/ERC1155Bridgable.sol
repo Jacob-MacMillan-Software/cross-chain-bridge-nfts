@@ -37,45 +37,13 @@ contract ERC1155Bridgable is IERC1155Bridgable, BridgeMinters, ERC1155Upgradeabl
 	 * @param _recipient Recipient of newly minted item
 	 * @param _id ID of item to mint
 	 * @param _amount amount of items to mint
-	 * @param _data Arbitrary data passde to mint function
-	 * @param _verification ABI encoded package containing a hash of a message described below, and a signature of the message, signed by contract owner
-	 * @dev Description of verification package: abi.encode(keccak256(abi.encode(_recipient, _id, _amount, _data).toEthSignedMessageHash(), <signature of previous param>))
 	 */
 	function bridgeMint(
 		address _recipient,
 		uint256 _id,
 		uint256 _amount,
-		bytes calldata _data,
-		bytes calldata _verification
+		bytes calldata _data
 	) external virtual override onlyBridge {
-		// Verify _verification
-		_verifyMintSignature(_recipient, _id, _amount, _data, _verification, owner());
-
 		_mint(_recipient, _id, _amount, _data);
-	}
-
-	function _verifyMintSignature(
-		address _recipient,
-		uint256 _id,
-		uint256 _amount,
-		bytes calldata _data,
-		bytes calldata _verification,
-		address _expectedSigner
-	) internal pure {
-		// Verify _verification
-		bytes32 params;
-		bytes memory signature;
-		(params, signature) = abi.decode(_verification, (bytes32, bytes));
-
-		// Verification data matches given data
-		require(keccak256(abi.encode(
-			_recipient,
-			_id,
-			_amount,
-			_data
-		)).toEthSignedMessageHash() == params, "ERC1155Bridgable: Invalid verification");
-
-		// Verify signer is owner
-		require(params.recover(signature) == _expectedSigner, "ERC1155Bridgeable: Invalid signature");
 	}
 }
