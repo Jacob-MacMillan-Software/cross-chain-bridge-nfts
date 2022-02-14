@@ -37,6 +37,7 @@ contract ERC1155Bridgable is IERC1155Bridgable, BridgeMinters, ERC1155Upgradeabl
 	 * @param _recipient Recipient of newly minted item
 	 * @param _id ID of item to mint
 	 * @param _amount amount of items to mint
+	 * @param _data arbitrary data
 	 */
 	function bridgeMint(
 		address _recipient,

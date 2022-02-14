@@ -39,8 +39,6 @@ contract ERC721Bridgable is IERC721Bridgable, BridgeMinters, ERC721AUpgradeable 
 	 * MUST revert if the token already exists
 	 * @param _recipient Recipient of newly minted item
 	 * @param _id ID of item to mint
-	 * @param _verification ABI encoded package containing a hash of a message described below, and a signature of the message, signed by contract owner
-	 * @dev Description of verification package: abi.encode(keccak256(abi.encode(_recipient, _id).toEthSignedMessageHash(), <signature of previous param>))
 	 */
 	function bridgeMint(
 		address _recipient,

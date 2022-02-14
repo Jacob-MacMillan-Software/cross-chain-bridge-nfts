@@ -13,7 +13,6 @@ interface IERC1155Bridgable is IERC1155Upgradeable {
 		 address recipient,
 		 uint256 id,
 		 uint256 amount,
-		 bytes calldata data,
-		 bytes calldata verification
+		 bytes calldata data
 	 ) external;
 }
