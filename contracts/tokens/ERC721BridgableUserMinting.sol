@@ -38,10 +38,6 @@ contract ERC721BridgableUserMinting is ERC721Bridgable {
 		uint256 _nonce,
 		bytes calldata _verification
 	) external {
-		// Verify nonce is valid
-		require(!userMintNonce[_nonce], "ERC721BridgableUserMinting: Nonce already used");
-		userMintNonce[_nonce] = true;
-
 		// Verify _verification
 		_verifyMintSignature(_recipient, _id, _nonce, _verification, owner());
 
@@ -55,6 +51,10 @@ contract ERC721BridgableUserMinting is ERC721Bridgable {
 		bytes calldata _verification,
 		address _expectedSigner
 	) internal pure {
+		// Verify nonce is valid
+		require(!userMintNonce[_nonce], "ERC721BridgableUserMinting: Nonce already used");
+		userMintNonce[_nonce] = true;
+
 		// Verify _verification
 		bytes32 params;
 		bytes memory signature;

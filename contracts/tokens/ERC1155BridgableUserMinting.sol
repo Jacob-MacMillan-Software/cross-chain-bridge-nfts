@@ -38,10 +38,6 @@ contract ERC1155BridgableUserMinting is ERC1155Bridgable {
 		uint256 _nonce,
 		bytes calldata _verification
 	) external {
-		// Verify nonce is valid
-		require(!userMintNonce[_nonce], "ERC1155BridgableUserMinting: Nonce already used");
-		userMintNonce[_nonce] = true;
-
 		// Verify hash and signature are valid
 		_verifyMintSignature(_recipient, _id, _amount, _data, _nonce, _verification, owner());
 
@@ -57,6 +53,10 @@ contract ERC1155BridgableUserMinting is ERC1155Bridgable {
 		bytes calldata _verification,
 		address _expectedSigner
 	) internal pure {
+      // Verify nonce is valid
+		require(!userMintNonce[_nonce], "ERC1155BridgableUserMinting: Nonce already used");
+		userMintNonce[_nonce] = true;
+
 		// Verify _verification
 		bytes32 params;
 		bytes memory signature;
