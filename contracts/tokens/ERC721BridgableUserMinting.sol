@@ -14,11 +14,15 @@ contract ERC721BridgableUserMinting is ERC721Bridgable {
 	// Stores which nonces have been used in user item mints
 	mapping (uint256 => bool) public userMintNonce;
 
+	uint256 private networkId;
+
 	function __ERC721BridgableUserMinting_init(
+		uint256 _networkId,
 		string memory _name,
 		string memory _symbol,
 		uint256 _maxBatch
 	) internal onlyInitializing {
+		networkId = _networkId;
 		__ERC721Bridgable_init(_name, _symbol, _maxBatch);
 	}
 
@@ -50,7 +54,7 @@ contract ERC721BridgableUserMinting is ERC721Bridgable {
 		uint256 _nonce,
 		bytes calldata _verification,
 		address _expectedSigner
-	) internal pure {
+	) internal {
 		// Verify nonce is valid
 		require(!userMintNonce[_nonce], "ERC721BridgableUserMinting: Nonce already used");
 		userMintNonce[_nonce] = true;
@@ -64,6 +68,7 @@ contract ERC721BridgableUserMinting is ERC721Bridgable {
 		require(keccak256(abi.encode(
 			_recipient,
 			_id,
+			networkId,
 			_nonce
 		)).toEthSignedMessageHash() == params, "ERC721BridgableUserMinting: Invalid verification");
 
