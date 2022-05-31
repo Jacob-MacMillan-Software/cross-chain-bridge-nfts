@@ -9,7 +9,7 @@ describe("ERC1155BridgableUserMinting", function () {
     const Token = await ethers.getContractFactory(
       "ERC1155BridgableUserMintingTest"
     );
-    const token = await Token.deploy();
+    const token = await Token.deploy(100);
     await token.deployed();
 
     // Get balance of tokenID 1 as base-line
@@ -20,6 +20,15 @@ describe("ERC1155BridgableUserMinting", function () {
       addr1.address, // _recipient
       1, // _id
       1, // _amount
+      100,
+      "0x", // _data
+      1, // _nonce
+    ];
+
+    const passedArgs = [
+      addr1.address, // _recipient
+      1, // _id
+      1, // _amount
       "0x", // _data
       1, // _nonce
     ];
@@ -27,7 +36,7 @@ describe("ERC1155BridgableUserMinting", function () {
     const verification = await generateHashedMessage(args, owner);
 
     // @ts-ignore
-    const mintTx = await token.userMint(...args, verification);
+    const mintTx = await token.userMint(...passedArgs, verification);
     /* const tx = */ await mintTx.wait();
 
     const postBalance = await token.balanceOf(addr1.address, 1);

@@ -8,7 +8,7 @@ import "./tokens/ERC1155BridgableUserMinting.sol";
  * and allows contract owner to give users permission to mint their own items 
  */
 contract ERC1155BridgableUserMintingTest is ERC1155BridgableUserMinting {
-   constructor() initializer {
-      __ERC1155BridgableUserMinting_init("/testmetadata/");
+   constructor(uint256 networkId) initializer {
+      __ERC1155BridgableUserMinting_init(networkId, "/testmetadata/");
    }
 }
