@@ -1,16 +1,12 @@
 import { ethers } from "hardhat";
 
-// @ts-ignore
-export async function generateHashedMessage(args: Array, signer) {
+export async function generateHashedMessage(
+  args: Array<any>,
+  types: Array<string>,
+  // @ts-ignore
+  signer
+) {
   const abi = new ethers.utils.AbiCoder();
-  const types = [
-    "address",
-    "uint256",
-    "uint256",
-    "uint256",
-    "bytes",
-    "uint256",
-  ];
 
   const abiEncoded = abi.encode(types, args);
 
