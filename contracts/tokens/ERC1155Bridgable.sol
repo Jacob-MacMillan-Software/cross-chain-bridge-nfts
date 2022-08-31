@@ -33,7 +33,6 @@ contract ERC1155Bridgable is IERC1155Bridgable, BridgeMinters, ERC1155Upgradeabl
 	/**
 	 * @dev Create a new token, of a given ID
 	 * SHOULD only be callable by the bridge network
-	 * MUST revert if the token already exists
 	 * @param _recipient Recipient of newly minted item
 	 * @param _id ID of item to mint
 	 * @param _amount amount of items to mint

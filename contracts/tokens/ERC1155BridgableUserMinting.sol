@@ -24,7 +24,6 @@ contract ERC1155BridgableUserMinting is ERC1155Bridgable {
 	/**
 	 * @dev Lets users mint new tokens, of a given ID, with permission from contract owner
 	 * SHOULD only be callable by the bridge network
-	 * MUST revert if the token already exists
 	 * @param _recipient Recipient of newly minted item
 	 * @param _id ID of item to mint
 	 * @param _amount amount of items to mint
