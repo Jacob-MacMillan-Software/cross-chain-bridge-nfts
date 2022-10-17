@@ -29,7 +29,7 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^3.4.1",
     "eslint-plugin-promise": "^5.1.1",
-    "ethereum-waffle": "^3.4.0",
+    "ethereum-waffle": "^4.0.7",
     "ethers": "^5.5.1",
     "hardhat": "^2.7.0",
     "hardhat-gas-reporter": "^1.0.4",
