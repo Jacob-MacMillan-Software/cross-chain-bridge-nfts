@@ -203,7 +203,7 @@
     "ms": "^2.1.2",
     "node-addon-api": "^2.0.2",
     "node-environment-flags": "^1.0.6",
-    "node-fetch": "^2.6.6",
+    "node-fetch": "^2.6.7",
     "node-gyp-build": "^4.3.0",
     "normalize-path": "^3.0.0",
     "object-inspect": "^1.11.0",
