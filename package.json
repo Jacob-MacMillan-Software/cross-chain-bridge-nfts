@@ -117,7 +117,7 @@
     "fill-range": "^7.0.1",
     "find-up": "^2.1.0",
     "flat": "^4.1.1",
-    "follow-redirects": "^1.14.5",
+    "follow-redirects": "^1.14.8",
     "fp-ts": "^1.19.3",
     "fs-extra": "^7.0.1",
     "fs.realpath": "^1.0.0",
