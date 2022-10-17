@@ -1,13 +1,13 @@
 {
   "name": "cross-chain-bridge-nfts",
   "version": "1.0.0",
-  "description": "This project demonstrates an advanced Hardhat use case, integrating other tools commonly used alongside Hardhat in the ecosystem.",
+  "description": "Library containing base contracts for NFTs with support for Xenum's bridge protocol",
   "main": ".eslintrc.js",
   "directories": {
     "test": "test"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "hardhat test"
   },
   "repository": {
     "type": "git",
